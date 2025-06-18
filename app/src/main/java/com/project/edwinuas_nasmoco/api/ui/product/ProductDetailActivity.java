@@ -21,9 +21,14 @@ import java.text.DecimalFormatSymbols;
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ImageView imgProductDetail;
+<<<<<<< HEAD
+    private TextView tvProductName, tvProductPrice, tvProductStock, tvProductDescription, tvProductViews, tvProductCategory, tvProductStatus;
+    private MaterialButton btnAddToCart;
+=======
     private TextView tvProductName, tvProductPrice, tvProductStock, tvProductDescription, tvProductViews, tvProductCategory;
     private TextView tvQuantity;
     private MaterialButton btnAddToCart, btnIncrease, btnDecrease;
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
     private OrderHelper orderHelper;
     private Product product;
 
@@ -45,10 +50,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvProductViews = findViewById(R.id.tvProductViews);
         btnAddToCart = findViewById(R.id.btnAddToCart);
 
+<<<<<<< HEAD
+=======
         tvQuantity = findViewById(R.id.tvQuantity);
         btnIncrease = findViewById(R.id.btnIncrease);
         btnDecrease = findViewById(R.id.btnDecrease);
 
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,6 +69,19 @@ public class ProductDetailActivity extends AppCompatActivity {
         // Ambil data produk dari intent
         product = getIntent().getParcelableExtra("product");
 
+<<<<<<< HEAD
+        // Pastikan data produk diteruskan dengan benar
+        if (product != null) {
+            tampilkanDetailProduk();
+        } else {
+            Toast.makeText(this, "Produk tidak ditemukan", Toast.LENGTH_SHORT).show();
+            finish();  // Jika produk tidak ditemukan, keluar dari activity
+        }
+
+        btnAddToCart.setOnClickListener(v -> {
+            if (product.getStok() > 0) {
+                product.setOrderQuantity(quantity);  // set jumlah order ke product
+=======
         if (product != null) {
             tampilkanDetailProduk();
         }
@@ -86,6 +107,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(v -> {
             if (product.getStok() > 0) {
                 product.setOrderQuantity(quantity);  // set jumlah order ke product (asumsi ada setter)
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
                 orderHelper.addToOrder(product);
                 Toast.makeText(this, "Produk ditambahkan ke keranjang (" + quantity + " item)", Toast.LENGTH_SHORT).show();
                 finish();
@@ -95,10 +117,13 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
+=======
     private void updateQuantity() {
         tvQuantity.setText(String.valueOf(quantity));
     }
 
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
     private void tampilkanDetailProduk() {
         tvProductName.setText(product.getMerk());
 
@@ -110,8 +135,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         String hargaFormatted = "Rp " + formatter.format(product.getHargajual());
         tvProductPrice.setText(hargaFormatted);
 
+<<<<<<< HEAD
+        // Tampilan kategori
+=======
 
         //Tampilan kategori
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         tvProductCategory.setText(product.getKategori());
         // Tampilkan stok dan deskripsi
         tvProductStock.setText("Stok: " + product.getStok());
@@ -124,18 +153,26 @@ public class ProductDetailActivity extends AppCompatActivity {
             tvProductStock.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             btnAddToCart.setEnabled(false);
             btnAddToCart.setText("Stok Habis");
+<<<<<<< HEAD
+=======
             btnIncrease.setEnabled(false);
             btnDecrease.setEnabled(false);
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         } else {
             tvProductStock.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
             btnAddToCart.setEnabled(true);
             btnAddToCart.setText("Keranjang");
+<<<<<<< HEAD
+        }
+
+=======
             btnIncrease.setEnabled(true);
             btnDecrease.setEnabled(true);
         }
 
         updateQuantity();
 
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         // Tampilkan gambar produk
         Glide.with(this)
                 .load(new ServerAPI().IMAGE_BASE_URL + product.getFoto())

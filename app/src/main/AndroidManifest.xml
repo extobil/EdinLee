@@ -20,10 +20,15 @@
         android:theme="@style/Theme.Edwinuas_nasmoco"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+<<<<<<< HEAD
 
 
         <activity
             android:name=".api.ui.home.CategoryProductActivity"
+=======
+        <activity
+            android:name=".api.ForgotPasswordActivity"
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
             android:exported="false" />
         <activity
             android:name=".api.ui.dashboard.Checkout"

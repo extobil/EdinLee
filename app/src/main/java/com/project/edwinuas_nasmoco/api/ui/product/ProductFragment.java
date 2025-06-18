@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,8 +31,14 @@ import retrofit2.Response;
 
 public class ProductFragment extends Fragment {
     private FragmentProductBinding binding;
+<<<<<<< HEAD
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
+=======
+    private RecyclerView recyclerView, categoryRecyclerView;
+    private ProductAdapter adapter;
+    private CategoryAdapter categoryAdapter;
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
     private OrderHelper orderHelper;
     private List<Product> fullProductList;
     private String selectedCategory = "Semua";
@@ -51,7 +58,6 @@ public class ProductFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterProductList(newText);
                 return true;
             }
         });
@@ -63,28 +69,75 @@ public class ProductFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+<<<<<<< HEAD
         if (getArguments() != null && getArguments().getString("selectedCategory") != null) {
             selectedCategory = getArguments().getString("selectedCategory");
             fetchProductByCategory(selectedCategory);
         } else {
             fetchProduct();
         }
+=======
+        fetchProduct();
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
 
+
+        // Ensure bottom nav reflects current fragment
         BottomNavigationView bottomNav = requireActivity().findViewById(R.id.nav_view);
         if (bottomNav != null) {
             bottomNav.post(() -> bottomNav.setSelectedItemId(R.id.navigation_product));
         }
     }
 
+<<<<<<< HEAD
     private void fetchProduct() {
         RegisterAPI apiService = RetrofitClient.getRetrofitInstance().create(RegisterAPI.class);
         Call<List<Product>> call = apiService.getProducts();
 
+=======
+
+    private void fetchProduct() {
+        RegisterAPI apiService = RetrofitClient.getRetrofitInstance().create(RegisterAPI.class);
+        Call<List<Product>> call = apiService.getProducts();
+
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+<<<<<<< HEAD
                     setupProductList(response.body());
+=======
+                    fullProductList = response.body();
+
+                    adapter = new ProductAdapter(getContext(), fullProductList, new ProductAdapter.OnProductClickListener() {
+                        @Override
+                        public void onProductClick(Product product) {
+                            orderHelper.addToOrder(product);
+                            Toast.makeText(getContext(), product.getMerk() + " berhasil ditambahkan ke keranjang", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onProductViewClick(Product product, ProductAdapter.ViewHolder holder) {
+                            int newViewCount = product.getViewCount() + 1;
+                            product.setViewCount(newViewCount);
+                            holder.tvView.setText("Dilihat " + newViewCount + "x");
+
+                            RegisterAPI api = RetrofitClient.getRetrofitInstance().create(RegisterAPI.class);
+                            Call<ResponseBody> updateCall = api.updateProductView(product.getKode(), newViewCount);
+                            updateCall.enqueue(new Callback<ResponseBody>() {
+                                @Override
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) { }
+
+                                @Override
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    Toast.makeText(getContext(), "Gagal update view count", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                    recyclerView.setAdapter(adapter);
+
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
                 } else {
                     Toast.makeText(getContext(), "Gagal mengambil data produk", Toast.LENGTH_SHORT).show();
                 }
@@ -93,6 +146,7 @@ public class ProductFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
             }
         });
     }
@@ -114,10 +168,13 @@ public class ProductFragment extends Fragment {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Toast.makeText(getContext(), "Gagal koneksi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+=======
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
             }
         });
     }
 
+<<<<<<< HEAD
     private void setupProductList(List<Product> products) {
         fullProductList = products;
 
@@ -162,6 +219,8 @@ public class ProductFragment extends Fragment {
         }
         adapter.updateData(filteredList);
     }
+=======
+>>>>>>> 52c3001d310bd25828220ae841d1469673023b2f
 
     @Override
     public void onDestroyView() {

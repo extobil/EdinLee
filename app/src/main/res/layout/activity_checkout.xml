@@ -54,7 +54,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+<<<<<<< HEAD
                         android:text="Alamat Pengiriman Kamu"
+=======
+                        android:text="Alamat Kirim"
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
                         android:layout_marginBottom="5dp"/>
 
                     <LinearLayout
@@ -69,7 +73,11 @@
                             android:orientation="vertical"
                             android:layout_marginEnd="2dp">
 
+<<<<<<< HEAD
                             <TextView
+=======
+                            <EditText
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
                                 android:id="@+id/tvFullName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -86,7 +94,11 @@
                             android:orientation="vertical"
                             android:layout_marginStart="2dp">
 
+<<<<<<< HEAD
                             <TextView
+=======
+                            <EditText
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
                                 android:id="@+id/tvPhoneNumber"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -106,7 +118,11 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
+<<<<<<< HEAD
                             <TextView
+=======
+                            <EditText
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
                                 android:id="@+id/tvAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -121,7 +137,11 @@
                             android:layout_weight="1"
                             android:orientation="vertical"
                             android:layout_marginStart="2dp">
+<<<<<<< HEAD
                             <TextView
+=======
+                            <EditText
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
                                 android:id="@+id/tvkodepos"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

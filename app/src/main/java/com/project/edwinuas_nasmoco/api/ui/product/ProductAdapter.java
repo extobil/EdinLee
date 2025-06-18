@@ -36,7 +36,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.productList = productList;
         this.listener = listener;
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -101,12 +104,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public void filterList(List<Product> filteredList) {
         productList = filteredList;
-        notifyDataSetChanged();
-    }
-
-    // Tambahkan method ini untuk update data
-    public void updateData(List<Product> newList) {
-        this.productList = newList;
         notifyDataSetChanged();
     }
 

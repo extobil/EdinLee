@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.project.edwinuas_nasmoco.R;
+import com.project.edwinuas_nasmoco.api.ForgotPasswordActivity;
 import com.project.edwinuas_nasmoco.api.RegisterAPI;
 import com.project.edwinuas_nasmoco.api.ServerAPI;
 import com.project.edwinuas_nasmoco.api.login;
@@ -34,18 +36,21 @@ public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
     private String email;
+    private LinearLayout btnGantiPassword;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        btnGantiPassword = root.findViewById(R.id.btnGantiPassword);
+        btnGantiPassword.setOnClickListener(v -> startActivity(new Intent(getActivity(), ForgotPasswordActivity.class)));
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("user_session", getContext().MODE_PRIVATE);
         email = sharedPreferences.getString("email", "");
 
         // Mendapatkan NavController
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-
+        
         // Jika tidak login, arahkan ke GuestProfile Fragment
         if (email.isEmpty()) {
             navController.navigate(R.id.GuestProfile);
@@ -59,6 +64,7 @@ public class NotificationsFragment extends Fragment {
         binding.menuEditProfile.setOnClickListener(v -> {
             navController.navigate(R.id.fragmentProfile);
         });
+
 
         // Navigasi ke Informasi Perusahaan
         binding.menuInfoPerusahaan.setOnClickListener(v -> {

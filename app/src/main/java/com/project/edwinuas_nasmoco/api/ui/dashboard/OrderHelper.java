@@ -83,5 +83,11 @@ public class OrderHelper {
         sharedPreferences.edit().putString(ORDER_KEY, json).apply();
     }
 
+    public void clearOrders() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("order_items");
+        editor.apply();
+    }
+
 
 }

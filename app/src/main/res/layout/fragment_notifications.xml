@@ -88,13 +88,21 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="16dp"
+
                 android:background="@drawable/order_history"
+
+
+
                 app:tint="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="Order History"
+
+
+
                 android:textSize="16sp"
                 android:textColor="@android:color/black" />
         </LinearLayout>

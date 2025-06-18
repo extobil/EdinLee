@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+<<<<<<< HEAD
+=======
+import android.widget.EditText;
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -26,6 +30,8 @@ import com.project.edwinuas_nasmoco.R;
 import com.project.edwinuas_nasmoco.api.RegisterAPI;
 import com.project.edwinuas_nasmoco.api.ServerAPI;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -36,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -52,13 +59,22 @@ public class Checkout extends AppCompatActivity {
     private TextView tvShippingCost, tvTotalAll, tvSubtotal, tvEstimatedDelivery;
     private Button btnCheckout, btnCheckTax;
     private RadioGroup rgPaymentMethod;
+<<<<<<< HEAD
     private TextView etFullName, etAddress, etPhoneNumber, etKodepos;
+=======
+    private EditText etFullName, etAddress, etPhoneNumber, etKodepos;
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
 
     private List<OrderItem> orderItems;
     
     private List<Province> provinceList = new ArrayList<>();
     private List<City> cityList = new ArrayList<>();
+<<<<<<< HEAD
     private List<String> courierList = Arrays.asList("jne", "tiki", "pos");
+=======
+    private List<String> courierList = Arrays.asList("jne", "tiki");
+    private List<String> courierDisplayNames = Arrays.asList("Cargo", "ABL Express");
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
 
     private int selectedProvinceId = -1;
     private int selectedCityId = -1;
@@ -151,13 +167,18 @@ public class Checkout extends AppCompatActivity {
 
         // Setup courier spinner
         ArrayAdapter<String> courierAdapter = new ArrayAdapter<>(this,
+<<<<<<< HEAD
                 android.R.layout.simple_spinner_item, courierList);
+=======
+                android.R.layout.simple_spinner_item, courierDisplayNames);
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         courierAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourier.setAdapter(courierAdapter);
 
         spinnerCourier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+<<<<<<< HEAD
                 selectedCourier = courierList.get(position);
                 shippingCost = 0;
                 taxAmount = 0;
@@ -169,6 +190,21 @@ public class Checkout extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+=======
+                // Gunakan value asli berdasarkan posisi yang dipilih
+                selectedCourier = courierList.get(position);
+                Log.d("SelectedCourier", "Courier selected: " + selectedCourier);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Default ke kurir pertama jika tidak dipilih
+                selectedCourier = courierList.get(0);
+            }
+        });
+
+
+>>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         // Load provinces
         loadProvinces();
 
@@ -238,34 +274,101 @@ public class Checkout extends AppCompatActivity {
             getCost();
         });
 
-        // Checkout button listener
+        // Listener untuk tombol Checkout
         btnCheckout.setOnClickListener(v -> {
-            // Validate personal information
-            if (etFullName.getText().toString().trim().isEmpty() ||
-                    etAddress.getText().toString().trim().isEmpty() ||
-                    etPhoneNumber.getText().toString().trim().isEmpty() ||
-                    etKodepos.getText().toString().trim().isEmpty()) {
-                Toast.makeText(Checkout.this, "Mohon lengkapi informasi pribadi Anda", Toast.LENGTH_SHORT).show();
-                return;
+//            if (selectedShippingOption == null) {
+//                Toast.makeText(Checkout.this, "Silakan pilih metode pengiriman terlebih dahulu.", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+
+            sendOrderToServer();
+        });
+
+    }
+
+    private void sendOrderToServer() {
+        SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+        int pelangganId = prefs.getInt("user_id", -1);
+        String sessionEmail = prefs.getString("email", null);
+
+        JSONObject orderObj = new JSONObject();
+        JSONArray orderDetailArray = new JSONArray();
+
+        try {
+            // ===== Bagian order (header) =====
+            orderObj.put("id", pelangganId); // <-- pastikan kamu punya ID pelanggan dari session atau response login
+            orderObj.put("nama_kirim", etFullName.getText().toString());
+            orderObj.put("email_kirim", sessionEmail);
+            orderObj.put("telp_kirim", etPhoneNumber.getText().toString());
+            orderObj.put("alamat_kirim", etAddress.getText().toString());
+            orderObj.put("kota_kirim", spinnerCity.getSelectedItem().toString());
+            orderObj.put("provinsi_kirim", spinnerProvince.getSelectedItem().toString());
+            orderObj.put("kodepos_kirim", etKodepos.getText().toString().replaceAll("[^0-9]", ""));
+            orderObj.put("lama_kirim", estimatedDelivery); // dari ongkir
+            orderObj.put("subtotal", subtotal);
+            orderObj.put("ongkir", shippingCost);
+            orderObj.put("total_bayar", subtotal + shippingCost);
+            orderObj.put("metode_bayar", rgPaymentMethod); // atau "cod" sesuai pilihan user
+            orderObj.put("bukti_bayar", ""); // bisa dikosongkan saat awal
+            orderObj.put("status", "menunggu"); // default status awal
+
+            // ===== Bagian detail order =====
+            for (OrderItem item : orderItems) {
+                JSONObject itemObj = new JSONObject();
+                itemObj.put("kode", item.getKode());
+                itemObj.put("harga", item.getHargajual());
+                itemObj.put("qty", item.getQuantity());
+                orderDetailArray.put(itemObj);
             }
 
-            if (selectedProvinceId == -1 || selectedCityId == -1) {
-                Toast.makeText(Checkout.this, "Pilih provinsi dan kota tujuan terlebih dahulu", Toast.LENGTH_SHORT).show();
-                return;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Gagal membangun data pesanan.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Kirim ke server sebagai application/x-www-form-urlencoded
+        RequestBody requestBody = new FormBody.Builder()
+                .add("order", orderObj.toString())
+                .add("order_detail", orderDetailArray.toString())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(ServerAPI.BASE_URL + "post_pesan.php")
+                .post(requestBody)
+                .build();
+
+        OkHttpClient client = new OkHttpClient();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> Toast.makeText(Checkout.this, "Gagal terhubung ke server: " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
-            if (shippingCost == 0 && totalWeight > 0) { // Jika berat ada, tapi ongkir 0, berarti belum cek ongkir
-                Toast.makeText(Checkout.this, "Silakan cek ongkir", Toast.LENGTH_SHORT).show();
-                return;
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resStr = response.body().string();
+                Log.d("OrderResponse", resStr);
+
+                runOnUiThread(() -> {
+                    try {
+                        JSONObject res = new JSONObject(resStr);
+                        int kode = res.getInt("kode");
+                        if (kode == 1) {
+                            OrderHelper orderHelper = new OrderHelper(Checkout.this);
+                            orderHelper.clearOrders();
+                            Toast.makeText(Checkout.this, "Pesanan berhasil dibuat!", Toast.LENGTH_LONG).show();
+                            // Arahkan ke halaman sukses atau kosongkan keranjang
+                            finish();
+                        } else {
+                            Toast.makeText(Checkout.this, "Gagal membuat pesanan: " + res.getString("pesan"), Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(Checkout.this, "Format respon tidak valid dari server.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-            double finalTotalPayment = subtotal + shippingCost + taxAmount;
-            String checkoutMessage = String.format("Checkout berhasil!\nNama: %s\nAlamat: %s\nTelepon: %s\nMetode Pembayaran: %s\nTotal: Rp %,.0f",
-                    etFullName.getText().toString().trim(),
-                    etAddress.getText().toString().trim(),
-                    etPhoneNumber.getText().toString().trim(),
-                    etKodepos.getText().toString().trim(),
-                    selectedPaymentMethod,
-                    finalTotalPayment);
-            Toast.makeText(Checkout.this, checkoutMessage, Toast.LENGTH_LONG).show();
         });
     }
 

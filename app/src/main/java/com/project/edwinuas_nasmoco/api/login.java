@@ -22,7 +22,6 @@ import com.project.edwinuas_nasmoco.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -57,13 +56,17 @@ public class login extends AppCompatActivity {
             return;
         }
 
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         registerd = findViewById(R.id.registerd);
-
+        TextView tvLupaPassword = findViewById(R.id.tvLupaPassword);
+        tvLupaPassword.setOnClickListener(v -> {
+            startActivity(new Intent(login.this, ForgotPasswordActivity.class));
+        });
         registerd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +79,6 @@ public class login extends AppCompatActivity {
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Simpan status login sebagai guest di SharedPreferences
                 SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("is_logged_in", true);
@@ -89,8 +91,6 @@ public class login extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
         login = findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
@@ -138,15 +138,23 @@ public class login extends AppCompatActivity {
                                         "Login Berhasil",
                                         Toast.LENGTH_SHORT).show();
 
-                                // Simpan data login di SharedPreferences
                                 SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("is_logged_in", true);
                                 editor.putString("nama", data.getString("nama"));
                                 editor.putString("email", data.getString("email"));
+
+                                // Ambil dan simpan user_id
+                                int userId = data.optInt("user_id", -1);
+                                if (userId != -1) {
+                                    editor.putInt("user_id", userId);
+                                    Log.d("Login", "User ID " + userId + " saved to SharedPreferences.");
+                                } else {
+                                    Log.e("Login", "user_id tidak ditemukan dalam response");
+                                }
+
                                 editor.apply();
 
-                                // Arahkan ke MainActivity
                                 Intent intent = new Intent(login.this, MainActivity.class);
                                 intent.putExtra("nama", data.getString("nama"));
                                 intent.putExtra("email", data.getString("email"));
@@ -154,27 +162,27 @@ public class login extends AppCompatActivity {
                                 finish();
                             } else {
                                 pd.dismiss();
-                                AlertDialog.Builder msg = new AlertDialog.Builder(login.this);
-                                msg.setMessage("Status User Ini Tidak Aktif")
+                                new AlertDialog.Builder(login.this)
+                                        .setMessage("Status User Ini Tidak Aktif")
                                         .setNegativeButton("Retry", null).create().show();
                             }
                         } else {
                             pd.dismiss();
-                            AlertDialog.Builder msg = new AlertDialog.Builder(login.this);
-                            msg.setMessage("Email atau Password Salah")
+                            new AlertDialog.Builder(login.this)
+                                    .setMessage("Email atau Password Salah")
                                     .setNegativeButton("Retry", null).create().show();
                         }
                     } else {
                         pd.dismiss();
-                        AlertDialog.Builder msg = new AlertDialog.Builder(login.this);
-                        msg.setMessage("Terjadi Kesalahan pada Server")
+                        new AlertDialog.Builder(login.this)
+                                .setMessage("Terjadi Kesalahan pada Server")
                                 .setNegativeButton("Retry", null).create().show();
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                     pd.dismiss();
-                    AlertDialog.Builder msg = new AlertDialog.Builder(login.this);
-                    msg.setMessage("Terjadi Kesalahan: " + e.getMessage())
+                    new AlertDialog.Builder(login.this)
+                            .setMessage("Terjadi Kesalahan: " + e.getMessage())
                             .setNegativeButton("Retry", null).create().show();
                 }
             }
@@ -183,11 +191,10 @@ public class login extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 pd.dismiss();
                 Log.e("Info Load", "Load Gagal: " + t.toString());
-                AlertDialog.Builder msg = new AlertDialog.Builder(login.this);
-                msg.setMessage("Gagal Terhubung ke Server: " + t.getMessage())
+                new AlertDialog.Builder(login.this)
+                        .setMessage("Gagal Terhubung ke Server: " + t.getMessage())
                         .setNegativeButton("Retry", null).create().show();
             }
         });
-
     }
 }

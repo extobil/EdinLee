@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/teal_700"
+        android:background="@color/blue"
         android:elevation="4dp"
         app:title="Detail Produk"
         app:titleTextColor="@android:color/white"
@@ -39,9 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="8dp">
+            android:paddingTop="8dp"
+            android:gravity="center">
 
-            <!-- Product Image CardView remains the same -->
+            <!-- Product Image CardView -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
@@ -71,7 +72,7 @@
                 android:paddingEnd="24dp"
                 android:paddingBottom="16dp">
 
-                <!-- Product Name remains the same -->
+                <!-- Product Name -->
                 <TextView
                     android:id="@+id/tvProductName"
                     android:layout_width="match_parent"
@@ -86,7 +87,7 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif-medium"/>
 
-                <!-- Price section remains the same -->
+                <!-- Price Section -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -100,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:text="Rp"
                         android:textSize="18sp"
-                        android:textColor="#D84315"
+                        android:textColor="@color/blue"
                         android:textStyle="bold"
                         android:layout_marginEnd="4dp"/>
 
@@ -110,12 +111,12 @@
                         android:layout_height="wrap_content"
                         android:text="100.000"
                         android:textSize="22sp"
-                        android:textColor="#D84315"
+                        android:textColor="#03A9F4"
                         android:textStyle="bold"
                         android:fontFamily="sans-serif-medium"/>
                 </LinearLayout>
 
-                <!-- Views counter remains the same -->
+                <!-- Views Counter -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -139,7 +140,7 @@
                         android:textSize="14sp"/>
                 </LinearLayout>
 
-                <!-- NEW: Combined Status and Category row -->
+                <!-- Status and Category Info -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -154,9 +155,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="12dp"
-                        app:strokeColor="#2E7D32"
+                        app:strokeColor="#8BC34A"
                         app:strokeWidth="1dp"
-                        app:cardBackgroundColor="#E8F5E9">
+                        app:cardBackgroundColor="#CDDC39">
 
                         <TextView
                             android:id="@+id/tvProductStatus"
@@ -165,22 +166,22 @@
                             android:text="Tersedia"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="#2E7D32"
+                            android:textColor="#4CAF50"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:paddingTop="4dp"
                             android:paddingBottom="4dp"/>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- NEW: Category Card -->
+                    <!-- Category Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="12dp"
-                        app:strokeColor="#5C6BC0"
+                        app:strokeColor="#DA6C6C"
                         app:strokeWidth="1dp"
-                        app:cardBackgroundColor="#E8EAF6">
+                        app:cardBackgroundColor="#EAEBD0">
 
                         <TextView
                             android:id="@+id/tvProductCategory"
@@ -189,7 +190,7 @@
                             android:text="Elektronik"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="#5C6BC0"
+                            android:textColor="#DA6C6C"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:paddingTop="4dp"
@@ -198,7 +199,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Description Section remains the same -->
+            <!-- Description Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -236,10 +237,11 @@
                         android:lineSpacingExtra="4sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Action Bar remains the same -->
+    <!-- Bottom Action Bar -->
     <LinearLayout
         android:id="@+id/bottomActionBar"
         android:layout_width="match_parent"
@@ -255,56 +257,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Quantity Selector -->
-        <LinearLayout
-            android:id="@+id/layoutQuantity"
-            android:layout_width="70dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginEnd="8dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDecrease"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="-"
-                android:textSize="24sp"
-                android:padding="0dp"
-                app:cornerRadius="12dp"
-                app:strokeColor="#E0E0E0"
-                app:strokeWidth="1dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"/>
-
-            <TextView
-                android:id="@+id/tvQuantity"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="1"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:textColor="#212121"
-                android:fontFamily="sans-serif-medium"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnIncrease"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="+"
-                android:textSize="24sp"
-                android:padding="0dp"
-                app:cornerRadius="12dp"
-                app:strokeColor="#E0E0E0"
-                app:strokeWidth="1dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"/>
-        </LinearLayout>
-
         <!-- Add to Cart Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddToCart"
@@ -314,7 +266,7 @@
             android:layout_weight="2"
             android:text="Keranjang"
             android:textAllCaps="false"
-            android:backgroundTint="@color/teal_700"
+            android:backgroundTint="@color/blue"
             android:textColor="@android:color/white"
             app:cornerRadius="24dp"
             android:elevation="0dp"
@@ -322,4 +274,5 @@
             app:iconGravity="textStart"
             android:paddingStart="16dp"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
