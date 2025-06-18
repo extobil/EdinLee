@@ -22,7 +22,7 @@
             android:id="@+id/imageProduct"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:layout_marginBottom="8dp"
             android:contentDescription="Gambar Produk" />
 

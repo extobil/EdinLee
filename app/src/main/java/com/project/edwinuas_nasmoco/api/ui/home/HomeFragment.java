@@ -1,6 +1,6 @@
-
 package com.project.edwinuas_nasmoco.api.ui.home;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,17 +11,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.project.edwinuas_nasmoco.R;
-import com.project.edwinuas_nasmoco.api.RegisterAPI;
 import com.project.edwinuas_nasmoco.api.ui.dashboard.OrderHelper;
+
 import com.project.edwinuas_nasmoco.api.ui.product.Product;
 import com.project.edwinuas_nasmoco.api.ui.product.ProductAdapter;
 import com.project.edwinuas_nasmoco.api.ui.product.RetrofitClient;
@@ -71,39 +68,27 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupCategoryClickListeners() {
-        binding.carMpv.setOnClickListener(v -> navigateToProduct("MPV"));
-        binding.carHybrid.setOnClickListener(v -> navigateToProduct("Hybrid"));
-        binding.carSuv.setOnClickListener(v -> navigateToProduct("SUV"));
-        binding.carSedan.setOnClickListener(v -> navigateToProduct("Sedan"));
-        binding.carCommercial.setOnClickListener(v -> navigateToProduct("Commercial"));
-        binding.carHatchback.setOnClickListener(v -> navigateToProduct("Hatchback"));
+        binding.carMpv.setOnClickListener(v -> openCategoryActivity("MPV"));
+        binding.carHybrid.setOnClickListener(v -> openCategoryActivity("Hybrid"));
+        binding.carSuv.setOnClickListener(v -> openCategoryActivity("SUV"));
+        binding.carSedan.setOnClickListener(v -> openCategoryActivity("Sedan"));
+        binding.carCommercial.setOnClickListener(v -> openCategoryActivity("Commercial"));
+        binding.carHatchback.setOnClickListener(v -> openCategoryActivity("Hatchback"));
     }
 
-    private void navigateToProduct(String category) {
-        try {
-            Bundle result = new Bundle();
-            result.putString("selectedCategory", category);
-            getParentFragmentManager().setFragmentResult("categoryRequest", result);
-
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-            navController.navigate(R.id.navigation_product);
-
-            BottomNavigationView bottomNav = requireActivity().findViewById(R.id.nav_view);
-            if (bottomNav != null) {
-                bottomNav.post(() -> bottomNav.setSelectedItemId(R.id.navigation_product));
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Navigation error", e);
-            Toast.makeText(getContext(), "Navigation error", Toast.LENGTH_SHORT).show();
-        }
+    private void openCategoryActivity(String category) {
+        Intent intent = new Intent(requireContext(), CategoryProductActivity.class);
+        intent.putExtra("selectedCategory", category);
+        startActivity(intent);
     }
 
     private void setupTrendingProducts() {
         binding.recyclerTrending.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerTrending.setNestedScrollingEnabled(false);
 
-        RegisterAPI apiService = RetrofitClient.getRetrofitInstance().create(RegisterAPI.class);
-        Call<List<Product>> call = apiService.getProducts();
+        Call<List<Product>> call = RetrofitClient.getRetrofitInstance()
+                .create(com.project.edwinuas_nasmoco.api.RegisterAPI.class)
+                .getProducts();
 
         call.enqueue(new Callback<List<Product>>() {
             @Override
@@ -146,8 +131,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateProductViewCount(String productCode, int viewCount) {
-        RegisterAPI api = RetrofitClient.getRetrofitInstance().create(RegisterAPI.class);
-        Call<ResponseBody> updateCall = api.updateProductView(productCode, viewCount);
+        Call<ResponseBody> updateCall = RetrofitClient.getRetrofitInstance()
+                .create(com.project.edwinuas_nasmoco.api.RegisterAPI.class)
+                .updateProductView(productCode, viewCount);
+
         updateCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) { }

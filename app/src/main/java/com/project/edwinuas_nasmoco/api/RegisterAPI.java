@@ -65,7 +65,8 @@ public interface RegisterAPI {
     );
 
     @GET("get_mobil_by_kategori.php")
-    Call<MobilResponse> getMobilByKategori(@Query("kategori") String kategori);
+    Call<List<Product>> getMobilByKategoriProduk(@Query("kategori") String kategori);
+
 }
 
 
