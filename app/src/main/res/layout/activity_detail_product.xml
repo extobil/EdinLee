@@ -39,9 +39,12 @@
 
             <ImageView
                 android:id="@+id/imgProductDetail"
-                android:layout_width="match_parent"
-                android:layout_height="320dp" android:scaleType="centerCrop"
+                android:layout_width="320dp"
+                android:layout_height="220dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:layout_marginTop="20dp"
                 android:contentDescription="Gambar Produk"
                 android:elevation="2dp" android:background="@android:color/white" android:layout_marginBottom="16dp"
                 tools:src="@tools:sample/backgrounds/scenic" />
@@ -78,13 +81,13 @@
                         android:layout_marginBottom="12dp"
                         android:gravity="center">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp"
-                            android:textSize="22sp"
-                            android:textColor="#D32F2F" android:textStyle="bold"
-                            android:layout_marginEnd="4dp"/>
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Rp"-->
+<!--                            android:textSize="22sp"-->
+<!--                            android:textColor="#D32F2F" android:textStyle="bold"-->
+<!--                            android:layout_marginEnd="4dp"/>-->
 
                         <TextView
                             android:id="@+id/tvProductPrice"
@@ -133,6 +136,7 @@
                             android:checkable="false"
                             android:clickable="false"
                             android:gravity="center"
+                            android:textAlignment="center"
                             android:textSize="15sp"
                             android:textStyle="bold"
                             android:textColor="#2E7D32"
@@ -148,6 +152,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Elektronik"
+                            android:textAlignment="center"
                             android:checkable="false"
                             android:clickable="false"
                             android:gravity="center"
@@ -215,35 +220,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
-            android:id="@+id/layoutQuantityDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginEnd="16dp" android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/layoutQuantityDisplay"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:layout_marginEnd="16dp" android:paddingStart="12dp"-->
+<!--            android:paddingEnd="12dp"-->
+<!--            android:paddingTop="8dp"-->
+<!--            android:paddingBottom="8dp">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Qty:"
-                android:textSize="16sp"
-                android:textColor="#616161"
-                android:fontFamily="sans-serif-medium"
-                android:layout_marginEnd="6dp"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Qty:"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="#616161"-->
+<!--                android:fontFamily="sans-serif-medium"-->
+<!--                android:layout_marginEnd="6dp"/>-->
 
-            <TextView
-                android:id="@+id/tvQuantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1" android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#212121"
-                android:fontFamily="sans-serif-black"/>
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/tvQuantity"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="1" android:textSize="20sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#212121"-->
+<!--                android:fontFamily="sans-serif-black"/>-->
+<!--        </LinearLayout>-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddToCart"

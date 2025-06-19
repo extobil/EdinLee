@@ -20,12 +20,12 @@ public class ServerAPI {
     public static Retrofit getClient() {
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
-                    .setLenient() // Tambahkan ini untuk mengatasi JSON malformed
+                    .setLenient()
                     .create();
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson)) // Gunakan Gson yang sudah di-set lenient
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit;

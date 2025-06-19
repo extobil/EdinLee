@@ -88,9 +88,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     // Metode updateQuantity akan selalu menampilkan nilai 'quantity' saat ini
-    private void updateQuantity() {
-        tvQuantity.setText(String.valueOf(quantity));
-    }
+//    private void updateQuantity() {
+//        tvQuantity.setText(String.valueOf(quantity));
+//    }
 
     private void tampilkanDetailProduk() {
         tvProductName.setText(product.getMerk());
@@ -126,7 +126,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             btnAddToCart.setText("Tambah ke Keranjang"); // Pastikan teks ini konsisten
         }
 
-        updateQuantity(); // Untuk memastikan TextView kuantitas menampilkan nilai 'quantity' awal
+//        updateQuantity(); // Untuk memastikan TextView kuantitas menampilkan nilai 'quantity' awal
 
         // Tampilkan gambar produk
         Glide.with(this)
