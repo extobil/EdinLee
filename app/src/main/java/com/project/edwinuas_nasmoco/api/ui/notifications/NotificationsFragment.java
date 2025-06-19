@@ -65,6 +65,10 @@ public class NotificationsFragment extends Fragment {
             navController.navigate(R.id.fragmentProfile);
         });
 
+        binding.btnHistory.setOnClickListener(v -> {
+            navController.navigate(R.id.OderHistory);
+        });
+
 
         // Navigasi ke Informasi Perusahaan
         binding.menuInfoPerusahaan.setOnClickListener(v -> {

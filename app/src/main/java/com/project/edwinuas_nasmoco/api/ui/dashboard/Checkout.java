@@ -128,7 +128,7 @@ public class Checkout extends AppCompatActivity {
         rgPaymentMethod.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton selectedRadioButton = findViewById(checkedId);
             if (selectedRadioButton != null) {
-                selectedPaymentMethod = selectedRadioButton.getText().toString().equals("Cash On Delivery (COD)") ? "COD" : "Transfer Bank";
+                selectedPaymentMethod = selectedRadioButton.getText().toString().equals("Cash On Delivery (COD)") ? "cod" : "transfer";
             }
         });
 
@@ -279,7 +279,7 @@ public class Checkout extends AppCompatActivity {
             orderObj.put("subtotal", subtotal);
             orderObj.put("ongkir", shippingCost);
             orderObj.put("total_bayar", subtotal + shippingCost);
-            orderObj.put("metode_bayar", rgPaymentMethod); // atau "cod" sesuai pilihan user
+            orderObj.put("metode_bayar", selectedPaymentMethod); // atau "cod" sesuai pilihan user
             orderObj.put("bukti_bayar", ""); // bisa dikosongkan saat awal
             orderObj.put("status", "menunggu"); // default status awal
 

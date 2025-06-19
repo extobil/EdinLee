@@ -5,6 +5,7 @@ package com.project.edwinuas_nasmoco.api;
 import com.project.edwinuas_nasmoco.api.model.Mobil;
 import com.project.edwinuas_nasmoco.api.model.MobilResponse;
 
+import com.project.edwinuas_nasmoco.api.model.ResponseOrderHistory;
 import com.project.edwinuas_nasmoco.api.ui.product.Product;
 
 import java.util.List;
@@ -66,8 +67,18 @@ public interface RegisterAPI {
             @Part MultipartBody.Part imageupload
     );
 
+    @GET("getOrderHistory.php")
+    Call<ResponseOrderHistory> getOrderHistory(
+            @Query("id") int idPelanggan
+    );
 
 
+    @Multipart
+    @POST("upload_bukti_bayar.php")
+    Call<ResponseBody> uploadBuktiBayar(
+            @Part("trans_id") RequestBody transId,
+            @Part MultipartBody.Part bukti_bayar
+    );
 
 
     @FormUrlEncoded
