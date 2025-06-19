@@ -36,10 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.productList = productList;
         this.listener = listener;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

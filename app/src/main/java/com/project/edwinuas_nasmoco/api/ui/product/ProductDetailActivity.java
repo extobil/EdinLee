@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip; // Import Chip yang benar
 import com.project.edwinuas_nasmoco.R;
 import com.project.edwinuas_nasmoco.api.ServerAPI;
 import com.project.edwinuas_nasmoco.api.ui.dashboard.OrderHelper;
@@ -21,17 +22,16 @@ import java.text.DecimalFormatSymbols;
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ImageView imgProductDetail;
-<<<<<<< HEAD
-    private TextView tvProductName, tvProductPrice, tvProductStock, tvProductDescription, tvProductViews, tvProductCategory, tvProductStatus;
+    private TextView tvProductName, tvProductPrice, tvProductDescription, tvProductViews;
+    // Menggunakan Chip untuk status dan kategori
+    private Chip chipProductStatus, chipProductCategory;
+    private TextView tvQuantity; // Hanya menampilkan kuantitas, bukan selector
     private MaterialButton btnAddToCart;
-=======
-    private TextView tvProductName, tvProductPrice, tvProductStock, tvProductDescription, tvProductViews, tvProductCategory;
-    private TextView tvQuantity;
-    private MaterialButton btnAddToCart, btnIncrease, btnDecrease;
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
+    // btnIncrease dan btnDecrease tidak lagi dideklarasikan
     private OrderHelper orderHelper;
     private Product product;
 
+    // Kuantitas default, bisa diatur secara programatik jika ada logika lain
     private int quantity = 1;
 
     @SuppressLint("MissingInflatedId")
@@ -44,19 +44,18 @@ public class ProductDetailActivity extends AppCompatActivity {
         imgProductDetail = findViewById(R.id.imgProductDetail);
         tvProductName = findViewById(R.id.tvProductName);
         tvProductPrice = findViewById(R.id.tvProductPrice);
-        tvProductStock = findViewById(R.id.tvProductStatus);
-        tvProductCategory = findViewById(R.id.tvProductCategory);
+        // Pastikan inisialisasi Chip sesuai dengan ID di XML
+        chipProductStatus = findViewById(R.id.chipProductStatus);
+        chipProductCategory = findViewById(R.id.chipProductCategory);
         tvProductDescription = findViewById(R.id.tvProductDescription);
         tvProductViews = findViewById(R.id.tvProductViews);
+
+        // Pastikan btnAddToCart diinisialisasi sebelum digunakan
         btnAddToCart = findViewById(R.id.btnAddToCart);
 
-<<<<<<< HEAD
-=======
         tvQuantity = findViewById(R.id.tvQuantity);
-        btnIncrease = findViewById(R.id.btnIncrease);
-        btnDecrease = findViewById(R.id.btnDecrease);
+        // Tombol increase/decrease tidak perlu diinisialisasi lagi di sini
 
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         // Setup toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,45 +68,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         // Ambil data produk dari intent
         product = getIntent().getParcelableExtra("product");
 
-<<<<<<< HEAD
-        // Pastikan data produk diteruskan dengan benar
-        if (product != null) {
-            tampilkanDetailProduk();
-        } else {
-            Toast.makeText(this, "Produk tidak ditemukan", Toast.LENGTH_SHORT).show();
-            finish();  // Jika produk tidak ditemukan, keluar dari activity
-        }
-
-        btnAddToCart.setOnClickListener(v -> {
-            if (product.getStok() > 0) {
-                product.setOrderQuantity(quantity);  // set jumlah order ke product
-=======
         if (product != null) {
             tampilkanDetailProduk();
         }
 
-        // Set listener tombol +
-        btnIncrease.setOnClickListener(v -> {
-            if (quantity < product.getStok()) {
-                quantity++;
-                updateQuantity();
-            } else {
-                Toast.makeText(this, "Maksimum stok tercapai", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Set listener tombol -
-        btnDecrease.setOnClickListener(v -> {
-            if (quantity > 1) {
-                quantity--;
-                updateQuantity();
-            }
-        });
+        // Listener untuk tombol + dan - sudah dihapus dari layout dan kode Java
 
         btnAddToCart.setOnClickListener(v -> {
             if (product.getStok() > 0) {
-                product.setOrderQuantity(quantity);  // set jumlah order ke product (asumsi ada setter)
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
+                // Gunakan nilai 'quantity' yang sudah ada (default 1 atau dari mana pun Anda mengaturnya)
+                product.setOrderQuantity(quantity);
                 orderHelper.addToOrder(product);
                 Toast.makeText(this, "Produk ditambahkan ke keranjang (" + quantity + " item)", Toast.LENGTH_SHORT).show();
                 finish();
@@ -117,13 +87,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-=======
+    // Metode updateQuantity akan selalu menampilkan nilai 'quantity' saat ini
     private void updateQuantity() {
         tvQuantity.setText(String.valueOf(quantity));
     }
 
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
     private void tampilkanDetailProduk() {
         tvProductName.setText(product.getMerk());
 
@@ -132,47 +100,34 @@ public class ProductDetailActivity extends AppCompatActivity {
         symbols.setGroupingSeparator('.');
         symbols.setDecimalSeparator(',');
         DecimalFormat formatter = new DecimalFormat("#,###", symbols);
-        String hargaFormatted = "Rp " + formatter.format(product.getHargajual());
-        tvProductPrice.setText(hargaFormatted);
+        String hargaFormatted = formatter.format(product.getHargajual());
 
-<<<<<<< HEAD
-        // Tampilan kategori
-=======
+        tvProductPrice.setText("Rp " + hargaFormatted); // Tambahkan "Rp " di sini
 
-        //Tampilan kategori
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
-        tvProductCategory.setText(product.getKategori());
-        // Tampilkan stok dan deskripsi
-        tvProductStock.setText("Stok: " + product.getStok());
+        // Tampilan kategori menggunakan Chip
+        chipProductCategory.setText(product.getKategori());
         tvProductDescription.setText(product.getDeskripsi());
-
         tvProductViews.setText("Dilihat " + product.getViewCount() + "x");
 
-        // Atur warna dan status tombol berdasarkan stok
+        // Atur status stok pada Chip dan tombol Add To Cart
         if (product.getStok() == 0) {
-            tvProductStock.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            chipProductStatus.setText("Stok Habis");
+            chipProductStatus.setChipBackgroundColorResource(R.color.red_inactive);
+            chipProductStatus.setChipStrokeColorResource(R.color.red_border);
+            chipProductStatus.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             btnAddToCart.setEnabled(false);
             btnAddToCart.setText("Stok Habis");
-<<<<<<< HEAD
-=======
-            btnIncrease.setEnabled(false);
-            btnDecrease.setEnabled(false);
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         } else {
-            tvProductStock.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+            chipProductStatus.setText("Tersedia");
+            chipProductStatus.setChipBackgroundColorResource(R.color.green_active);
+            chipProductStatus.setChipStrokeColorResource(R.color.green_border);
+            chipProductStatus.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
             btnAddToCart.setEnabled(true);
-            btnAddToCart.setText("Keranjang");
-<<<<<<< HEAD
+            btnAddToCart.setText("Tambah ke Keranjang"); // Pastikan teks ini konsisten
         }
 
-=======
-            btnIncrease.setEnabled(true);
-            btnDecrease.setEnabled(true);
-        }
+        updateQuantity(); // Untuk memastikan TextView kuantitas menampilkan nilai 'quantity' awal
 
-        updateQuantity();
-
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
         // Tampilkan gambar produk
         Glide.with(this)
                 .load(new ServerAPI().IMAGE_BASE_URL + product.getFoto())

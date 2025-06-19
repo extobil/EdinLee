@@ -7,9 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<<<<<<< HEAD
+    <color name="buru">#0028FF</color>
     <color name="blue">#4DA8DA</color>
+    <color name="green_active">#E8F5E9</color>  <color name="green_border">#388E3C</color>  <color name="red_inactive">#FFEBEE</color>  <color name="red_border">#D32F2F</color>
 
-=======
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
+
 </resources>

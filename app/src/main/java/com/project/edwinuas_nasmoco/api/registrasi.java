@@ -1,8 +1,11 @@
 package com.project.edwinuas_nasmoco.api;
 
+import android.content.Context; // Import ini
 import android.content.Intent;
+import android.content.SharedPreferences; // Import ini
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,7 +66,6 @@ public class registrasi extends AppCompatActivity {
         });
     }
 
-    // Fungsi validasi email yang lebih baik
     public boolean isEmailValid(String email) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(expression);
@@ -98,25 +100,44 @@ public class registrasi extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     try {
                         String responseBody = response.body().string();
-                        Log.d("API Response", responseBody); // Logging response untuk debugging
+                        Log.d("API Response", responseBody);
 
-                        // Cek apakah response berbentuk JSON
-                        if (responseBody.startsWith("{")) {
-                            JSONObject json = new JSONObject(responseBody);
-                            if ("1".equals(json.optString("status"))) {
-                                if ("1".equals(json.optString("result"))) {
-                                    showMessage("Register Berhasil");
-                                    etemail.setText("");
-                                    etnama.setText("");
-                                    etpassword.setText("");
+                        JSONObject json = new JSONObject(responseBody);
+                        String status = json.optString("status");
+                        String result = json.optString("result");
+                        String message = json.optString("message");
+
+                        if ("1".equals(status)) { // Berhasil mendaftar (email tidak duplikat)
+                            if ("1".equals(result)) { // Data berhasil disimpan ke tbl_pelanggan DAN alamat_pengguna
+                                showMessage("Register Berhasil");
+
+                                // --- Penting: Ambil user_id dan simpan ke SharedPreferences ---
+                                int userId = json.optInt("user_id", -1); // Ambil user_id dari respons
+                                if (userId != -1) {
+                                    SharedPreferences sharedPreferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putInt("user_id", userId); // Simpan ID pengguna (int)
+                                    editor.putString("user_email", vemail); // Juga simpan email
+                                    editor.apply(); // Terapkan perubahan
+                                    Log.d("Registrasi", "User ID " + userId + " saved to SharedPreferences.");
                                 } else {
-                                    showMessage("Simpan Gagal");
+                                    Log.e("Registrasi", "User ID not returned from API or is invalid.");
                                 }
+                                // --- Akhir penyimpanan user_id ---
+
+                                etemail.setText("");
+                                etnama.setText("");
+                                etpassword.setText("");
+
+                                // Setelah registrasi berhasil dan ID tersimpan, arahkan ke login
+                                Intent intent = new Intent(registrasi.this, login.class);
+                                startActivity(intent);
+                                finish(); // Tutup aktivitas registrasi
                             } else {
-                                showMessage("User Sudah Ada");
+                                showMessage("Simpan Gagal: " + message); // Pesan gagal dari insert
                             }
                         } else {
-                            showMessage("Gagal Register! Response bukan JSON.");
+                            showMessage("User Sudah Ada"); // Pesan jika email duplikat
                         }
                     } catch (JSONException | IOException e) {
                         e.printStackTrace();
@@ -127,7 +148,6 @@ public class registrasi extends AppCompatActivity {
                     Log.e("Register Error", "Response Code: " + response.code());
                 }
             }
-
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {

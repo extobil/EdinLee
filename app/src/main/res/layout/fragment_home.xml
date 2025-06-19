@@ -48,96 +48,12 @@
             android:orientation="vertical"
             android:layout_marginBottom="16dp"
             android:padding="10dp">
-        <!-- Menu Navigasi -->
-<<<<<<< HEAD
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Category"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingHorizontal="-50dp"
-            android:layout_marginBottom="16dp"
-            android:weightSum="4">
 
-            <!-- Item Menu (Baru, Diskon, Flash, Riwayat) -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/tabung"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/tabung"
-                    android:contentDescription="Produk Baru" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TV TABUNG"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/led"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/led"
-                    android:contentDescription="Flash Sale" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TV LED"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/oled"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/oled"
-                    android:contentDescription="Diskon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TV OLED"
-                    android:textSize="12sp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-        </LinearLayout>
 
         <!-- Produk Trending -->
-=======
+
             <!-- Menu Navigasi -->
             <TextView
                 android:layout_width="wrap_content"
@@ -309,7 +225,7 @@
 
 
             <!-- Produk Trending -->
->>>>>>> f2cb6faf489d2697f7df7569dcdb12cea4ac2e14
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

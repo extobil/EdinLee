@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:textAllCaps="false"
-            android:backgroundTint="#064A55"
+            android:backgroundTint="@color/buru"
             android:textColor="@android:color/white"
             android:paddingHorizontal="24dp"
             android:paddingVertical="12dp" />

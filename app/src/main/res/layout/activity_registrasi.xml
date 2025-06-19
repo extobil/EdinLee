@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:gravity="center"
-    tools:context=".registrasi">
+    tools:context=".api.registrasi">
 
     <!-- CardView untuk container registrasi -->
     <androidx.cardview.widget.CardView
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Create an Account"
                 android:textAlignment="center"
-                android:textColor="#511D43"
+                android:textColor="@color/buru"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp" />
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#511D43"
+                android:backgroundTint="@color/buru"
                 android:text="Register"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Already have an account? Login"
-                android:textColor="#511D43"
+                android:textColor="@color/buru"
                 android:textStyle="italic"
                 android:textAlignment="center" />
         </LinearLayout>

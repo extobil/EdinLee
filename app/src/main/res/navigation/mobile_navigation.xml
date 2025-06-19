@@ -51,5 +51,11 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_guest_profile" />
 
+    <fragment
+        android:id="@+id/RiwayatPesanan"
+        android:name="com.project.edwinuas_nasmoco.api.ui.notifications.RiwayatPesanan"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_riwayat_pesanan" />
+
 
 </navigation>

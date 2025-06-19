@@ -74,7 +74,7 @@
 
         <LinearLayout
             android:layout_marginTop="20dp"
-            android:id="@+id/orderHistory"
+            android:id="@+id/btnGantiPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -88,21 +88,40 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="16dp"
-
-                android:background="@drawable/order_history"
-
-
-
+                android:background="@drawable/key"
                 app:tint="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Edit Password"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
 
-                android:text="Order History"
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/btnHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="16dp"
+            android:padding="20dp"
+            android:background="@drawable/category_background"
+            android:clickable="true"
+            android:focusable="true">
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/key"
+                app:tint="@android:color/white" />
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pesanan Saya"
                 android:textSize="16sp"
                 android:textColor="@android:color/black" />
         </LinearLayout>

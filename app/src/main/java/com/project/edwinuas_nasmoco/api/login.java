@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.project.edwinuas_nasmoco.R;
+import com.project.edwinuas_nasmoco.api.RegisterAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,17 +57,13 @@ public class login extends AppCompatActivity {
             return;
         }
 
-
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         registerd = findViewById(R.id.registerd);
-        TextView tvLupaPassword = findViewById(R.id.tvLupaPassword);
-        tvLupaPassword.setOnClickListener(v -> {
-            startActivity(new Intent(login.this, ForgotPasswordActivity.class));
-        });
+
         registerd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

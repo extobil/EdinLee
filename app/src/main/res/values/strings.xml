@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nasmoco App</string>
+    <string name="app_name">My Nasmoco</string>
     <string name="title_home">Produk</string>
     <string name="title_dashboard">Keranjang</string>
     <string name="title_notifications">Profil</string>

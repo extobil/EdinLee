@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-
+        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -30,19 +30,40 @@
                 android:textSize="23sp"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
-
-
+                android:layout_marginBottom="20dp"/>
         </LinearLayout>
-        <!-- Informasi Kontak -->
 
-        <!-- whatsapp -->
+        <!-- Gambar Toko -->
+        <ImageView
+            android:id="@+id/imageToko"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/img_4"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Tentang Kami -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tentang Kami"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Nasmoco adalah showroom dan pusat layanan mobil terpercaya yang menyediakan berbagai jenis mobil baru dan bekas berkualitas. Kami berlokasi di Semarang dan berkomitmen memberikan pelayanan terbaik, mulai dari konsultasi pembelian, test drive, hingga layanan purna jual. Kepuasan pelanggan adalah prioritas utama kami."
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Kontak Instagram -->
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/category_background"
             android:padding="5dp"
             android:gravity="left|center"
             android:layout_marginBottom="8dp">
@@ -63,18 +84,16 @@
                 android:id="@+id/textWebsite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="www.tokohidup.com"
-                android:textColor="#2196F3"
-                android:onClick="openWebsite"/>
+                android:text="www.nasmoco.com"
+                android:textColor="#2196F3"/>
         </LinearLayout>
 
-        <!-- Telepon -->
+        <!-- Kontak WhatsApp -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp"
-            android:background="@drawable/category_background"
             android:gravity="left|center"
             android:layout_marginBottom="16dp">
 
@@ -94,9 +113,8 @@
                 android:id="@+id/textPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+6285743448157"
-                android:textColor="#2196F3"
-                android:onClick="callPhone"/>
+                android:text="+6282243749774"
+                android:textColor="#2196F3"/>
         </LinearLayout>
 
     </LinearLayout>

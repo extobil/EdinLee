@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+// import android.widget.ImageView; // Tidak perlu import ImageView secara eksplisit jika menggunakan binding
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -53,23 +54,39 @@ public class OrderFragment extends Fragment {
         return root;
     }
 
+    // ... (kode di atas)
+
     private void setupRecyclerView() {
         RecyclerView recyclerView = binding.recyclerViewOrders;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<OrderItem> orderItems = orderHelper.getOrderItems();
-        OrderAdapter adapter = new OrderAdapter(requireContext(), orderItems, orderHelper);
-        recyclerView.setAdapter(adapter);
 
-        // Set total awal
-        updateTotal();
+        if (orderItems.isEmpty()) {
+            Log.d("OrderFragment", "Keranjang kosong: Menampilkan emptyCartContainer, menyembunyikan RecyclerView, Total, Checkout.");
+            binding.emptyCartContainer.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            binding.tvTotal.setVisibility(View.GONE);
+            binding.btnCheckout.setVisibility(View.GONE);
+        } else {
+            Log.d("OrderFragment", "Keranjang berisi: Menyembunyikan emptyCartContainer, menampilkan RecyclerView, Total, Checkout.");
+            binding.emptyCartContainer.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            binding.tvTotal.setVisibility(View.VISIBLE);
+            binding.btnCheckout.setVisibility(View.VISIBLE);
 
-        // Pasang listener agar total bayar update otomatis, jika adapter mendukung
-        // Misal adapter punya method setOnOrderChangeListener
-        if (adapter instanceof OrderAdapterWithListener) {
-            ((OrderAdapterWithListener) adapter).setOnOrderChangeListener(this::updateTotal);
+            OrderAdapter adapter = new OrderAdapter(requireContext(), orderItems, orderHelper);
+            recyclerView.setAdapter(adapter);
+
+            updateTotal();
+
+            if (adapter instanceof OrderAdapterWithListener) {
+                ((OrderAdapterWithListener) adapter).setOnOrderChangeListener(this::updateTotal);
+            }
         }
     }
+
+// ... (kode di bawah)
 
     private void updateTotal() {
         double total = orderHelper.getTotal();
@@ -82,7 +99,6 @@ public class OrderFragment extends Fragment {
         binding = null;
     }
 
-    // Contoh interface jika adapter punya listener untuk update total
     public interface OrderAdapterWithListener {
         void setOnOrderChangeListener(Runnable listener);
     }
