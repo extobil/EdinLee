@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServerAPI {
 
-    public static String BASE_URL="http://192.168.1.15/uas_nasmocoapp/";
+    public static String BASE_URL="https://www.candratri.my.id/uas_nasmocoapp/";
 
 
 
