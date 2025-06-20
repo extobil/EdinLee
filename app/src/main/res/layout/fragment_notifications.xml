@@ -1,10 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
-    android:padding="24dp">
+    android:background="#F6F8FA"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,16 +11,19 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
+        <!-- Profile Image -->
         <ImageView
             android:id="@+id/imgProfileNotif"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/img"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
             android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/circle_background" />
+            android:background="@drawable/circle_background"
+            android:elevation="4dp" />
 
+        <!-- Username -->
         <TextView
             android:id="@+id/textNamaUser"
             android:layout_width="wrap_content"
@@ -29,163 +31,152 @@
             android:text="Nama Pengguna"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            />
-
-        <!-- Judul -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Privacy and Settings"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="#333333"
             android:layout_marginBottom="24dp" />
 
-        <!-- Menu Edit Profile -->
+        <!-- Section Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pengaturan"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1E1E1E"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="4dp"
+            android:background="#E0E0E0"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Menu Item Template -->
+        <!-- Gunakan drawable seperti background_rounded.xml untuk rounded card style -->
         <LinearLayout
             android:id="@+id/menuEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingVertical="16dp"
-            android:padding="20dp"
-            android:background="@drawable/category_background"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/edit"
-                app:tint="@android:color/white" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/edit"
+                android:layout_marginEnd="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
                 android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="#222222" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:id="@+id/btnGantiPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingVertical="16dp"
-            android:padding="20dp"
-            android:background="@drawable/category_background"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/key"
-                app:tint="@android:color/white" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/key"
+                android:layout_marginEnd="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit Password"
                 android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="#222222" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:id="@+id/btnHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingVertical="16dp"
-            android:padding="20dp"
-            android:background="@drawable/category_background"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/img_6"
-                app:tint="@android:color/white" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/img_6"
+                android:layout_marginEnd="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pesanan Saya"
                 android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="#222222" />
         </LinearLayout>
 
-        <!-- Menu Informasi Perusahaan -->
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:id="@+id/menuInfoPerusahaan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingVertical="16dp"
-            android:padding="20dp"
-            android:background="@drawable/category_background"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/informasi"
-                app:tint="@android:color/white" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/informasi"
+                android:layout_marginEnd="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Informasi Perusahaan"
                 android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="#222222" />
         </LinearLayout>
 
-        <!-- Menu Logout -->
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:id="@+id/menuLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingVertical="16dp"
-            android:background="@drawable/category_background"
-            android:padding="20dp"
+            android:padding="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_vertical"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@android:drawable/ic_lock_power_off"
-                app:tint="@android:color/holo_red_light" />
+                android:layout_marginEnd="16dp"
+                app:tint="#D32F2F" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logout"
                 android:textSize="16sp"
-                android:textColor="@android:color/holo_red_light" />
+                android:textColor="#D32F2F" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="200dp"
-            android:text=""/>
     </LinearLayout>
 </ScrollView>
