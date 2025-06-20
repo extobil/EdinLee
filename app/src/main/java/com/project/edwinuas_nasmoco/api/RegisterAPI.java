@@ -39,6 +39,7 @@ public interface RegisterAPI {
     Call<ResponseBody> getProfile(
             @Query("email") String email
     );
+
     @FormUrlEncoded
     @POST("post_profile.php")
     Call<ResponseBody> updateProfile(

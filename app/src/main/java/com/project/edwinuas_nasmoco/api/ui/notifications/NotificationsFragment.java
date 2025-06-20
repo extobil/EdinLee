@@ -45,12 +45,13 @@ public class NotificationsFragment extends Fragment {
 
         btnGantiPassword = root.findViewById(R.id.btnGantiPassword);
         btnGantiPassword.setOnClickListener(v -> startActivity(new Intent(getActivity(), ForgotPasswordActivity.class)));
+
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("user_session", getContext().MODE_PRIVATE);
         email = sharedPreferences.getString("email", "");
 
         // Mendapatkan NavController
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
-        
+
         // Jika tidak login, arahkan ke GuestProfile Fragment
         if (email.isEmpty()) {
             navController.navigate(R.id.GuestProfile);
@@ -61,27 +62,26 @@ public class NotificationsFragment extends Fragment {
         getProfile(email);
 
         // Navigasi ke Edit Profile
-        binding.menuEditProfile.setOnClickListener(v -> {
-            navController.navigate(R.id.fragmentProfile);
-        });
+        binding.menuEditProfile.setOnClickListener(v -> navController.navigate(R.id.fragmentProfile));
 
-        binding.btnHistory.setOnClickListener(v -> {
-            navController.navigate(R.id.OderHistory);
-        });
-
+        // Navigasi ke Riwayat Order
+        binding.btnHistory.setOnClickListener(v -> navController.navigate(R.id.OderHistory));
 
         // Navigasi ke Informasi Perusahaan
-        binding.menuInfoPerusahaan.setOnClickListener(v -> {
-            navController.navigate(R.id.fragmentInformasi);
-        });
+        binding.menuInfoPerusahaan.setOnClickListener(v -> navController.navigate(R.id.fragmentInformasi));
 
         // Klik menu Logout
         binding.menuLogout.setOnClickListener(v -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
+            editor.remove("is_logged_in");
+            editor.remove("nama");
+            editor.remove("email");
+            editor.remove("user_id"); // pastikan ini juga dihapus
             editor.apply();
 
+            // Navigasi ke halaman login dan clear backstack
             Intent intent = new Intent(getActivity(), login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             requireActivity().finish();
         });
@@ -110,7 +110,7 @@ public class NotificationsFragment extends Fragment {
 
                             String fotoFilename = data.optString("filename", "");
                             if (!fotoFilename.isEmpty()) {
-                                String imageUrl = new ServerAPI().IMAGE_BASE_URL+ fotoFilename;
+                                String imageUrl = new ServerAPI().IMAGE_BASE_URL + fotoFilename;
 
                                 Glide.with(requireContext())
                                         .load(imageUrl)

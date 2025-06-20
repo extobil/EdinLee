@@ -2,6 +2,7 @@ package com.project.edwinuas_nasmoco.api.ui.notifications;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,9 +38,7 @@ public class OrderHistoryFragment extends Fragment {
 
     private Uri imageUri;
     private OrderModel selectedOrder;
-
-    // Ganti dengan user login aktif
-    private int userId = 13;
+    private int userId; // Tidak lagi hardcoded
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,6 +47,15 @@ public class OrderHistoryFragment extends Fragment {
 
         rvOrder = view.findViewById(R.id.rvOrderHistory);
         rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Ambil id_pelanggan dari SharedPreferences
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_session", getContext().MODE_PRIVATE);
+        userId = sharedPreferences.getInt("user_id", -1);
+
+        if (userId == -1) {
+            Toast.makeText(getContext(), "User belum login!", Toast.LENGTH_SHORT).show();
+            return view;
+        }
 
         loadOrderHistory();
 

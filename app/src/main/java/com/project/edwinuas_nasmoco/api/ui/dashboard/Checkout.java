@@ -281,7 +281,7 @@ public class Checkout extends AppCompatActivity {
             orderObj.put("total_bayar", subtotal + shippingCost);
             orderObj.put("metode_bayar", selectedPaymentMethod); // atau "cod" sesuai pilihan user
             orderObj.put("bukti_bayar", ""); // bisa dikosongkan saat awal
-            orderObj.put("status", "menunggu"); // default status awal
+            orderObj.put("status", "belum dibayar"); // default status awal
 
             // ===== Bagian detail order =====
             for (OrderItem item : orderItems) {

@@ -48,12 +48,14 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         OrderModel order = orderList.get(position);
 
+        holder.tvNoorder.setText("Noorder #" + order.getTrans_id());
         holder.tvNamaMobil.setText(order.getMerk());
         holder.tvAlamat.setText(order.getAlamat_kirim() + ", " + order.getKota_kirim() + ", " + order.getProvinsi_kirim());
         holder.tvEstimasi.setText("Estimasi: " + order.getLama_kirim() + " hari");
         holder.tvTanggalOrder.setText("Tanggal Order: " + order.getTgl_order());
         holder.tvSubtotal.setText("Subtotal: " + formatRupiah(order.getSubtotal()));
         holder.tvOngkir.setText("Ongkir: " + formatRupiah(order.getOngkir()));
+        holder.tvPyment.setText("Metode Pembayaran :" +order.getMetode_bayar());
         holder.tvTotalBayar.setText("Total: " + formatRupiah(order.getTotal_bayar()));
         holder.tvStatus.setText("Status: " + order.getStatus());
 
@@ -85,7 +87,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNamaMobil, tvAlamat, tvEstimasi, tvTanggalOrder, tvSubtotal, tvOngkir, tvTotalBayar, tvStatus;
+        TextView tvNamaMobil, tvAlamat, tvEstimasi, tvTanggalOrder, tvSubtotal, tvOngkir, tvTotalBayar, tvStatus, tvPyment, tvNoorder;
         LinearLayout layoutUpload;
         Button btnPilihGambar, btnUpload;
         ImageView imgBuktiBayar;
@@ -103,6 +105,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             layoutUpload = itemView.findViewById(R.id.layoutUpload);
             btnPilihGambar = itemView.findViewById(R.id.btnPilihGambar);
             imgBuktiBayar = itemView.findViewById(R.id.imgBuktiBayar);
+            tvNoorder = itemView.findViewById(R.id.tvNoorder);
+            tvPyment = itemView.findViewById(R.id.tvPyment);
+
         }
     }
 
